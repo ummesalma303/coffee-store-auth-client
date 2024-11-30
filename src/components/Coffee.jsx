@@ -23,7 +23,6 @@ const Coffee = ({ coffee, loadedCoffees, setLoadedCoffees }) => {
                 })
                     .then(res => res.json())
                     .then(data => {
-                        // console.log(data);
                         if (data.deletedCount) {
                             Swal.fire({
                                 title: "Deleted!",

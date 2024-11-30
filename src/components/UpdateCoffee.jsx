@@ -19,9 +19,8 @@ const UpdateCoffee = () => {
         const photo = e.target.photo.value;
 
         const newCoffee = { name, chef, supplier, taste, category, details, photo }
-        console.log(newCoffee)
-
-        // send data to the server and database
+       
+       
         fetch(`http://localhost:5000/coffee/${_id}`, {
             method: 'PUT',
             headers: {
@@ -31,9 +30,7 @@ const UpdateCoffee = () => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data);
-                if (data.modifiedCount) {
-                    console.log('successfully updated');
+                 if (data.modifiedCount) {
                     Swal.fire({
                         title: 'Success!',
                         text: 'Coffee updated successfully',

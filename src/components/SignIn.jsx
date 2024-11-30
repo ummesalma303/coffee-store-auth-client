@@ -4,22 +4,20 @@ import Swal from 'sweetalert2';
 
 const SignIn = (id) => {
 
-    const {signInUser}=useContext(AuthContext)
-    // console.log(signInUser)
+    const {signInUser,user,setUser}=useContext(AuthContext)
+  
     const handleSignIn=e=>{
         e.preventDefault()
         const email =e.target.email.value
         const password =e.target.password.value
-        console.log(email,password)
 
         signInUser(email,password)
         .then(res=>{
-            // console.log(res.user)
-            // console.log(res.user.metadata?.lastSignInTime)
+            setUser(res?.user)
+
             const leastLoginTime =res.user.metadata?.lastSignInTime
             const user= {email,password,leastLoginTime}
 
-            // update last login time
             fetch('http://localhost:5000/user/',{
                 method:"PATCH",
                 headers:{
@@ -40,41 +38,13 @@ const SignIn = (id) => {
 
                 
                   e.target.reset()
-                console.log(data)
+                 
             })
         })
         .catch(err=>{
-          console.log(err.message)
+         
         })
-        // createUser(email,password)
-        // .then(res=>{
-        //   console.log(res?.user)
-
-        //   const user={name,email}
-        //   console.log(user)
-        //   fetch('http://localhost:5000/user',{
-        //     method:"POST",
-        //     headers:{
-        //       'content-type':"application/json"
-        //     },
-        //     body:JSON.stringify(user)
-        //   })
-        //   .then(res=>res.json())
-        //   .then(data=>{
-        //     if(data.insertedId){
-        //       Swal.fire({
-        //         title: "Good job!",
-        //         text: "Added User",
-        //         icon: "success"
-        //       });
-        //       e.target.reset()
-        //     }
-        //     console.log(data)
-        //   })
-
-
-
-        // })
+        
         
     }
     return (

@@ -3,21 +3,21 @@ import { AuthContext } from '../providers/AuthProvider';
 import Swal from 'sweetalert2';
 
 const SignUp = () => {
-    const {createUser}=useContext(AuthContext)
-    // console.log(createUser)
+    const {createUser,setUser}=useContext(AuthContext)
+   
     const handleSignUp=e=>{
         e.preventDefault()
         const name =e.target.name.value
         const email =e.target.email.value
         const password =e.target.password.value
-        console.log(email,password)
-
+       
         createUser(email,password)
         .then(res=>{
-          console.log(res?.user)
+          setUser(res?.user)
+
           const leastLoginTime =res.user.metadata?.lastSignInTime
           const user={name,email,leastLoginTime}
-          console.log(user)
+         
           fetch('http://localhost:5000/user',{
             method:"POST",
             headers:{
@@ -27,10 +27,7 @@ const SignUp = () => {
           })
           .then(res=>res.json())
           .then(data=>{
-            // if(data.insertedId){
-              
-            // }
-            console.log(data)
+          
           })
 
           Swal.fire({
@@ -44,7 +41,7 @@ const SignUp = () => {
 
         })
         .catch(err=>{
-          console.log(err.message)
+         
         })
     }
     return (

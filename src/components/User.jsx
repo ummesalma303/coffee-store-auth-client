@@ -4,10 +4,9 @@ import Swal from 'sweetalert2';
 
 const User = () => {
     const loadedUsers= useLoaderData()
-    // console.log(users)
-
+    
     const [users,setUser]=useState(loadedUsers)
-    console.log(users)
+   
     const deleteUser=(id)=>{
 
         Swal.fire({
@@ -27,7 +26,7 @@ const User = () => {
                 })
                 .then(res=>res.json())
                 .then(data=>{
-                    // console.log(data)
+                  
                       Swal.fire({
                 title: "Deleted!",
                 text: "User has been deleted.",

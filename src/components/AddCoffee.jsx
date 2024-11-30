@@ -15,8 +15,7 @@ const AddCoffee = () => {
         const photo = e.target.photo.value;
 
         const newCoffee = { name, chef, supplier, taste, category, details, photo }
-        console.log(newCoffee)
-
+       
         // send data to the server and database
         fetch('http://localhost:5000/coffee', {
             method: 'POST',
@@ -28,7 +27,6 @@ const AddCoffee = () => {
             .then(res => res.json())
             .then(data => {
                 if (data.insertedId) {
-                    console.log('successfully added');
                     Swal.fire({
                         title: 'Success!',
                         text: 'Coffee added successfully',
