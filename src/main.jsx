@@ -24,7 +24,7 @@ const router = createBrowserRouter([
       {
         path: '/',
         element: <Home></Home>,
-        loader: () => fetch('http://localhost:5000/coffee')
+        loader: () => fetch('https://coffee-store-server-omega-seven.vercel.app/coffee')
       },
       {
         path: 'addCoffee',
@@ -33,7 +33,7 @@ const router = createBrowserRouter([
       {
         path: 'updateCoffee/:id',
         element: <UpdateCoffee></UpdateCoffee>,
-        loader: ({ params }) => fetch(`http://localhost:5000/coffee/${params.id}`)
+        loader: ({ params }) => fetch(`https://coffee-store-server-omega-seven.vercel.app/coffee/${params.id}`)
       },
       {
         path: '/signUp',
@@ -46,7 +46,7 @@ const router = createBrowserRouter([
       {
         path: '/user',
         element: <User></User>,
-        loader:()=>fetch('http://localhost:5000/user')
+        loader:()=>fetch('https://coffee-store-server-omega-seven.vercel.app/user')
       },
     ]
   },

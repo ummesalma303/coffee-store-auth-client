@@ -18,7 +18,7 @@ const SignIn = (id) => {
             const leastLoginTime =res.user.metadata?.lastSignInTime
             const user= {email,password,leastLoginTime}
 
-            fetch('http://localhost:5000/user/',{
+            fetch('https://coffee-store-server-omega-seven.vercel.app/user/',{
                 method:"PATCH",
                 headers:{
                     'content-type': 'application/json'

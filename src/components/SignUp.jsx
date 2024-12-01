@@ -18,7 +18,7 @@ const SignUp = () => {
           const leastLoginTime =res.user.metadata?.lastSignInTime
           const user={name,email,leastLoginTime}
          
-          fetch('http://localhost:5000/user',{
+          fetch('https://coffee-store-server-omega-seven.vercel.app/user',{
             method:"POST",
             headers:{
               'content-type':"application/json"
