@@ -1,8 +1,13 @@
-# React + Vite
+# Website Name: Coffee Store
+## Desciption:
+This is a full-stack web application designed to manage and showcase a coffee store. The data is stored in a MongoDB Atlas database and is retrieved and displayed dynamically on the user interface through server-side processing.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Currently, two official plugins are available:
+## Technology used:
+- React router dom
+- Firebase
+- Tailwind Css
+- Daisy Ui
+- npm package (Sweet alert2)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Live Preview: https://coffee-master-4820f.firebaseapp.com/
