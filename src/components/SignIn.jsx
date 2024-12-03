@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { AuthContext } from '../providers/AuthProvider';
 import Swal from 'sweetalert2';
+import { NavLink } from 'react-router-dom';
 
 const SignIn = (id) => {
 
@@ -62,8 +63,8 @@ const SignIn = (id) => {
             <span className="label-text">Password</span>
           </label>
           <input type="password" placeholder="password" name='password' className="input input-bordered" required />
-          
-        </div>
+            </div>
+            <p>create a account <NavLink to='/signUp' className='text-blue-600'>Sign UP</NavLink></p>
         <div className="form-control mt-6">
           <button type='submit' className="btn btn-primary text-white">Sign in</button>
         </div>
