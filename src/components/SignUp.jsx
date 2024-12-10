@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { AuthContext } from '../providers/AuthProvider';
 import Swal from 'sweetalert2';
 import { NavLink } from 'react-router-dom';
+import axios from 'axios';
 
 const SignUp = () => {
     const {createUser,setUser}=useContext(AuthContext)
@@ -18,18 +19,23 @@ const SignUp = () => {
 
           const leastLoginTime =res.user.metadata?.lastSignInTime
           const user={name,email,leastLoginTime}
-         
-          fetch('https://coffee-store-server-omega-seven.vercel.app/user',{
-            method:"POST",
-            headers:{
-              'content-type':"application/json"
-            },
-            body:JSON.stringify(user)
+          // using axios
+         axios.post('https://coffee-store-server-omega-seven.vercel.app/user',user)
+         .then(data=>{
+          console.log(data.data)
           })
-          .then(res=>res.json())
-          .then(data=>{
-          
-          })
+         //using fetch
+          // fetch('https://coffee-store-server-omega-seven.vercel.app/user',{
+          //   method:"POST",
+          //   headers:{
+          //     'content-type':"application/json"
+          //   },
+          //   body:JSON.stringify(user)
+          // })
+          // .then(res=>res.json())
+          // .then(data=>{
+          // console.log(data.data)
+          // })
 
           Swal.fire({
             title: "Good job!",
@@ -41,9 +47,9 @@ const SignUp = () => {
 
 
         })
-        .catch(err=>{
+        // .catch(err=>{
          
-        })
+        // })
     }
     return (
         <div className='flex justify-center items-center h-screen'>

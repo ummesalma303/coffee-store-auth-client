@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { AuthContext } from '../providers/AuthProvider';
 import Swal from 'sweetalert2';
 import { NavLink } from 'react-router-dom';
+import axios from 'axios';
 
 const SignIn = (id) => {
 
@@ -18,33 +19,50 @@ const SignIn = (id) => {
 
             const leastLoginTime =res.user.metadata?.lastSignInTime
             const user= {email,password,leastLoginTime}
-
-            fetch('https://coffee-store-server-omega-seven.vercel.app/user/',{
-                method:"PATCH",
-                headers:{
-                    'content-type': 'application/json'
-                },
-                body: JSON.stringify(user)
-            })
-            .then(res=>res.json())
+            /* ------------------------------- using axios ------------------------------ */
+            axios.patch('https://coffee-store-server-omega-seven.vercel.app/user/')
             .then(data=>{
+              console.log(data.data)
+              if (data.modifiedCount>0) {
+                  Swal.fire({
+                      title: "Good job!",
+                      text: "Added User",
+                      icon: "success"
+                    });
+              }
 
-                if (data.modifiedCount>0) {
-                    Swal.fire({
-                        title: "Good job!",
-                        text: "Added User",
-                        icon: "success"
-                      });
-                }
+              
+                e.target.reset()
+               
+          })
+      })
+            /* ------------------------------- using fetch ------------------------------ */
+            // fetch('https://coffee-store-server-omega-seven.vercel.app/user/',{
+            //     method:"PATCH",
+            //     headers:{
+            //         'content-type': 'application/json'
+            //     },
+            //     body: JSON.stringify(user)
+            // })
+            // .then(res=>res.json())
+            // .then(data=>{
+
+            //     if (data.modifiedCount>0) {
+            //         Swal.fire({
+            //             title: "Good job!",
+            //             text: "Added User",
+            //             icon: "success"
+            //           });
+            //     }
 
                 
-                  e.target.reset()
+            //       e.target.reset()
                  
-            })
-        })
-        .catch(err=>{
+            // })
+        // })
+        // .catch(err=>{
          
-        })
+        // })
         
         
     }

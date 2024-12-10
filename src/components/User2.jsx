@@ -1,15 +1,31 @@
-import React, { useState } from 'react';
-import { IoCheckmarkDoneSharp, IoCheckmarkOutline } from 'react-icons/io5';
-import { useLoaderData } from 'react-router-dom';
-import Swal from 'sweetalert2';
+import { useQuery } from '@tanstack/react-query';
+import React, { useEffect, useState } from 'react';
 
-const User = () => {
-    const loadedUsers= useLoaderData()
-  const isCompleted = false;
-    const [users,setUser]=useState(loadedUsers)
-   
+const User2 = () => {
+    // const [users,setUser]=useState()
+    // useEffect(()=>{
+    //     fetch('https://coffee-store-server-omega-seven.vercel.app/user')
+    //     .then(res=>res.json())
+    //     .then(data=>{
+    //         console.log(data)
+    //     setUser(data)})
+    // },[])
+
+    const {isPending,isError,error,data: users}=useQuery({
+        queryKey:["users"],
+        queryFn: async()=>{
+            const res = await fetch('https://coffee-store-server-omega-seven.vercel.app/user')
+            return res.json()
+        }
+    })
+
+    if(isPending){
+        return <div className="flex justify-center items-center"> <span className="loading loading-spinner text-primary"></span></div>
+    }else if(isError){
+        return <p>{error.message}</p>
+    }
+
     const deleteUser=(id)=>{
-
         Swal.fire({
             title: "Are you sure?",
             text: "You won't be able to revert this!",
@@ -34,8 +50,8 @@ const User = () => {
                 icon: "success"
               });
 
-              const remaining = users.filter(user=>user._id !== id)
-              setUser(remaining)
+            //   const remaining = users.filter(user=>user._id !== id)
+            //   setUser(remaining)
                 })
             
             }
@@ -43,11 +59,8 @@ const User = () => {
     }
 
 
-
-
-   
     return (
-      <div className='pb-16'>
+        <div className='pb-16'>
         <div className="text-center my-4">
         <input type="text" className='border-2 w-1/2 p-3 rounded-lg' placeholder='search.....' />
       </div>
@@ -72,7 +85,7 @@ const User = () => {
             <td>{user?.leastLoginTime}</td>
           <td className='space-x-4'><button className='btn'>Edit</button>
             <button onClick={() => deleteUser(user?._id)} className='btn'>Delete</button>
-            <button type="button" className='btn'>{ isCompleted?<IoCheckmarkDoneSharp />:<IoCheckmarkOutline />}</button>
+            {/* <button type="button" className='btn'>{ isCompleted?<IoCheckmarkDoneSharp />:<IoCheckmarkOutline />}</button> */}
           </td>
           </tr>)
       }
@@ -83,4 +96,4 @@ const User = () => {
     );
 };
 
-export default User;
+export default User2;

@@ -1,7 +1,7 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
-import App from './App.jsx'
+// import App from './App.jsx'
 
 import {
   createBrowserRouter,
@@ -15,6 +15,15 @@ import AuthProvider from './providers/AuthProvider.jsx';
 import SignUp from './components/SignUp.jsx';
 import SignIn from './components/SignIn.jsx';
 import User from './components/User.jsx';
+import {
+  QueryClient,
+  QueryClientProvider,
+ 
+} from '@tanstack/react-query'
+import User2 from './components/User2.jsx';
+
+const queryClient = new QueryClient()
+
 
 const router = createBrowserRouter([
   {
@@ -48,14 +57,25 @@ const router = createBrowserRouter([
         element: <User></User>,
         loader:()=>fetch('https://coffee-store-server-omega-seven.vercel.app/user')
       },
+      {
+        path: '/user2',
+        element: <User2></User2>,
+        // loader:()=>fetch('https://coffee-store-server-omega-seven.vercel.app/user')
+      },
     ]
   },
 ]);
 
+
+
+
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <AuthProvider>
+     <QueryClientProvider client={queryClient}>
+      <AuthProvider>
     <RouterProvider router={router} />
     </AuthProvider>
+    </QueryClientProvider>
+    
   </StrictMode>,
 )

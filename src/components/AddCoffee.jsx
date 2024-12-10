@@ -1,4 +1,5 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useEffect } from 'react';
 import Swal from 'sweetalert2'
 
 const AddCoffee = () => {
@@ -17,25 +18,46 @@ const AddCoffee = () => {
         const newCoffee = { name, chef, supplier, taste, category, details, photo }
        
         // send data to the server and database
-        fetch('https://coffee-store-server-omega-seven.vercel.app/coffee', {
-            method: 'POST',
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(newCoffee)
-        })
-            .then(res => res.json())
-            .then(data => {
-                if (data.insertedId) {
-                    Swal.fire({
-                        title: 'Success!',
-                        text: 'Coffee added successfully',
-                        icon: 'success',
-                        confirmButtonText: 'Ok'
-                    });
-                    e.target.reset();
-                }
-            })
+       useEffect(()=>
+        axios.post('https://coffee-store-server-omega-seven.vercel.app/coffee')
+       .then(data=>{
+           console.log(data)
+           console.log(data.data)
+           if (data.insertedId) {
+               Swal.fire({
+                   title: 'Success!',
+                   text: 'Coffee added successfully',
+                   icon: 'success',
+                   confirmButtonText: 'Ok'
+               });
+               e.target.reset();
+           }
+       })
+,[])
+
+
+
+
+
+        // fetch('https://coffee-store-server-omega-seven.vercel.app/coffee', {
+        //     method: 'POST',
+        //     headers: {
+        //         'content-type': 'application/json'
+        //     },
+        //     body: JSON.stringify(newCoffee)
+        // })
+        //     .then(res => res.json())
+        //     .then(data => {
+        //         if (data.insertedId) {
+        //             Swal.fire({
+        //                 title: 'Success!',
+        //                 text: 'Coffee added successfully',
+        //                 icon: 'success',
+        //                 confirmButtonText: 'Ok'
+        //             });
+        //             e.target.reset();
+        //         }
+        //     })
 
     }
 
